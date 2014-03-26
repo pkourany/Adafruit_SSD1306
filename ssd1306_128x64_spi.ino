@@ -1,3 +1,4 @@
+
 /*********************************************************************
 This is an example for our Monochrome OLEDs based on SSD1306 drivers
 
@@ -41,9 +42,14 @@ Adafruit_SSD1306 display(OLED_DC, OLED_RESET, OLED_CS);
 #define YPOS 1
 #define DELTAY 2
 
+int random(int maxRand) {
+    return rand() % maxRand;
+}
+
 #define LOGO16_GLCD_HEIGHT 16 
-#define LOGO16_GLCD_WIDTH  16 
-static const unsigned char PROGMEM logo16_glcd_bmp[] =
+#define LOGO16_GLCD_WIDTH  16
+
+static const unsigned char logo16_glcd_bmp[] =
 { 0B00000000, 0B11000000,
   0B00000001, 0B11000000,
   0B00000001, 0B11000000,
