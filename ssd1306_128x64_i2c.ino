@@ -27,13 +27,13 @@ Adafruit_SSD1306 display(OLED_RESET);
 #define YPOS 1
 #define DELTAY 2
 
-int random(int maxRand) {
+int arandom(int maxRand) {
     return rand() % maxRand;
 }
 
 #define LOGO16_GLCD_HEIGHT 16 
 #define LOGO16_GLCD_WIDTH  16 
-static const unsigned char logo16_glcd_bmp[] =
+static const unsigned char LOGO16_GLCD_BMP[] =
 { 0B00000000, 0B11000000,
   0B00000001, 0B11000000,
   0B00000001, 0B11000000,
@@ -59,7 +59,7 @@ void setup()   {
   Serial.begin(9600);
 
   // by default, we'll generate the high voltage from the 3.3v line internally! (neat!)
-  display.begin(SSD1306_SWITCHCAPVCC, 0x3D);  // initialize with the I2C addr 0x3D (for the 128x64)
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3D (for the 128x64)
   // init done
   
   display.display(); // show splashscreen
@@ -144,7 +144,7 @@ void setup()   {
 
   // miniature bitmap display
   display.clearDisplay();
-  display.drawBitmap(30, 16,  logo16_glcd_bmp, 16, 16, 1);
+  display.drawBitmap(30, 16,  LOGO16_GLCD_BMP, 16, 16, 1);
   display.display();
 
   // invert the display
@@ -154,7 +154,7 @@ void setup()   {
   delay(1000); 
 
   // draw a bitmap icon and 'animate' movement
-  testdrawbitmap(logo16_glcd_bmp, LOGO16_GLCD_HEIGHT, LOGO16_GLCD_WIDTH);
+  testdrawbitmap(LOGO16_GLCD_BMP, LOGO16_GLCD_HEIGHT, LOGO16_GLCD_WIDTH);
 }
 
 
@@ -168,9 +168,9 @@ void testdrawbitmap(const uint8_t *bitmap, uint8_t w, uint8_t h) {
  
   // initialize
   for (uint8_t f=0; f< NUMFLAKES; f++) {
-    icons[f][XPOS] = random(display.width());
+    icons[f][XPOS] = arandom(display.width());
     icons[f][YPOS] = 0;
-    icons[f][DELTAY] = random(5) + 1;
+    icons[f][DELTAY] = arandom(5) + 1;
     
     Serial.print("x: ");
     Serial.print(icons[f][XPOS], DEC);
@@ -183,21 +183,21 @@ void testdrawbitmap(const uint8_t *bitmap, uint8_t w, uint8_t h) {
   while (1) {
     // draw each icon
     for (uint8_t f=0; f< NUMFLAKES; f++) {
-      display.drawBitmap(icons[f][XPOS], icons[f][YPOS], logo16_glcd_bmp, w, h, WHITE);
+      display.drawBitmap(icons[f][XPOS], icons[f][YPOS], LOGO16_GLCD_BMP, w, h, WHITE);
     }
     display.display();
     delay(200);
     
     // then erase it + move it
     for (uint8_t f=0; f< NUMFLAKES; f++) {
-      display.drawBitmap(icons[f][XPOS], icons[f][YPOS],  logo16_glcd_bmp, w, h, BLACK);
+      display.drawBitmap(icons[f][XPOS], icons[f][YPOS],  LOGO16_GLCD_BMP, w, h, BLACK);
       // move it
       icons[f][YPOS] += icons[f][DELTAY];
       // if its gone, reinit
       if (icons[f][YPOS] > display.height()) {
-	icons[f][XPOS] = random(display.width());
+	icons[f][XPOS] = arandom(display.width());
 	icons[f][YPOS] = 0;
-	icons[f][DELTAY] = random(5) + 1;
+	icons[f][DELTAY] = arandom(5) + 1;
       }
     }
    }
