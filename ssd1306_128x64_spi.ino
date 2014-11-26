@@ -42,9 +42,6 @@ Adafruit_SSD1306 display(OLED_DC, OLED_RESET, OLED_CS);
 #define YPOS 1
 #define DELTAY 2
 
-int random(int maxRand) {
-    return rand() % maxRand;
-}
 
 #define LOGO16_GLCD_HEIGHT 16 
 #define LOGO16_GLCD_WIDTH  16
