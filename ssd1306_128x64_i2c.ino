@@ -165,9 +165,9 @@ void testdrawbitmap(const uint8_t *bitmap, uint8_t w, uint8_t h) {
  
   // initialize
   for (uint8_t f=0; f< NUMFLAKES; f++) {
-    icons[f][XPOS] = arandom(display.width());
+    icons[f][XPOS] = random(display.width());
     icons[f][YPOS] = 0;
-    icons[f][DELTAY] = arandom(5) + 1;
+    icons[f][DELTAY] = random(5) + 1;
     
     Serial.print("x: ");
     Serial.print(icons[f][XPOS], DEC);
@@ -192,9 +192,9 @@ void testdrawbitmap(const uint8_t *bitmap, uint8_t w, uint8_t h) {
       icons[f][YPOS] += icons[f][DELTAY];
       // if its gone, reinit
       if (icons[f][YPOS] > display.height()) {
-	icons[f][XPOS] = arandom(display.width());
+	icons[f][XPOS] = random(display.width());
 	icons[f][YPOS] = 0;
-	icons[f][DELTAY] = arandom(5) + 1;
+	icons[f][DELTAY] = random(5) + 1;
       }
     }
    }
