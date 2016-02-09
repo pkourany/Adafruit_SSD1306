@@ -23,20 +23,17 @@ If using the beginner-128x64-OLED-I2C.ino with the particle.io and the Grove see
 
 you can connect all four wires to the Photon
 
-black GND 
-red 3v3      
-white SDA   Pin D0 
-yellow SCL  Pin D1 
+1. black GND 
+1. red 3v3      
+1. white SDA   Pin D0 
+1. yellow SCL  Pin D1 
 
 Remember to include the following files:
 
-Adafruit_GFX.cpp
-
-Adafruit_GFX.h
-
-Adafruit_SSD1306.cpp
-
-Adafruit_SSD1306.h
+1. Adafruit_GFX.cpp
+1. Adafruit_GFX.h
+1. Adafruit_SSD1306.cpp
+1. Adafruit_SSD1306.h
 
 
 
