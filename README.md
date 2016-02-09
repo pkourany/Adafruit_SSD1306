@@ -18,8 +18,17 @@ Adafruit_SSD1306 display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
 
 
 
+.
+.
+.
+
 Update by Jeremy Ellis Feb 9th, 2016
-If using the beginner-128x64-OLED-I2C.ino with the particle.io and the Grove seeedstudio 128x64 OLED http://www.seeedstudio.com/wiki/Grove_-_OLED_Display_0.96%22#With_Arduino
+
+If using the beginner-128x64-OLED-I2C.ino with the particle.io and the I2C protocol and the Grove seeedstudio 128x64 OLED
+
+http://www.seeedstudio.com/wiki/Grove_-_OLED_Display_0.96%22#With_Arduino
+
+
 
 you can connect all four wires to the Photon
 
