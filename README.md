@@ -3,7 +3,9 @@ Adafruit_SSD1306
 
 Adafruit_SSD1306 library ported for Spark by Paul Kourany, Mar 18, 2014
 
-SSD1306 128x64 Wiring guide 
+## Software SPI
+
+SSD1306 128x64 Wiring guide
 
 ```
 // If using software SPI (the default case):
@@ -44,8 +46,22 @@ Remember to include the following files:
 1. Adafruit_SSD1306.cpp
 1. Adafruit_SSD1306.h
 
+## Hardware SPI
 
+If your OLED screen has the following labels: `CS`, `DC`, `RST`, `D1`, `D0`, `VCC`, `GND` you have a Hardware SPI and should use `ssd1306_128x64_spi.ino`
 
+The wiring should match this:
 
+```
+OLED_D0 -> A3 (SPI CLK)
+OLED_D1 -> A5 (SPI MOSI)
+OLED_DC -> D3
+OLED_CS -> D4
+OLED_RESET -> D5
+OLED_VCC -> 3V3
+OLED_GND -> GND
+```
 
+Tested on Particle Proton.
 
+Compiled from https://community.particle.io/t/adafruit-ssd1306-solved/15175/26
