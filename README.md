@@ -62,6 +62,6 @@ OLED_VCC -> 3V3
 OLED_GND -> GND
 ```
 
-Tested on Particle Proton.
+Tested on Particle Photon.
 
 Compiled from https://community.particle.io/t/adafruit-ssd1306-solved/15175/26
