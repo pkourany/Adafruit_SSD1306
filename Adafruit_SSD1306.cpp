@@ -128,14 +128,16 @@ Adafruit_SSD1306::Adafruit_SSD1306(int8_t SID, int8_t SCLK, int8_t DC, int8_t RS
   sclk = SCLK;
   sid = SID;
   hwSPI = false;
+  spiClass = NULL;
 }
 
 // constructor for hardware SPI - we indicate DataCommand, ChipSelect, Reset 
-Adafruit_SSD1306::Adafruit_SSD1306(int8_t DC, int8_t RST, int8_t CS) : Adafruit_GFX(SSD1306_LCDWIDTH, SSD1306_LCDHEIGHT) {
+Adafruit_SSD1306::Adafruit_SSD1306(int8_t DC, int8_t RST, int8_t CS, bool USE_SPI1) : Adafruit_GFX(SSD1306_LCDWIDTH, SSD1306_LCDHEIGHT) {
   dc = DC;
   rst = RST;
   cs = CS;
   hwSPI = true;
+  spiClass = USE_SPI1 ? &SPI1 : &SPI;
 }
 
 // initializer for I2C - we only indicate the reset pin!
@@ -143,6 +145,7 @@ Adafruit_SSD1306::Adafruit_SSD1306(int8_t reset) :
 Adafruit_GFX(SSD1306_LCDWIDTH, SSD1306_LCDHEIGHT) {
   sclk = dc = cs = sid = -1;
   rst = reset;
+  spiClass = NULL;
 }
   
 
@@ -161,10 +164,11 @@ void Adafruit_SSD1306::begin(uint8_t vccstate, uint8_t i2caddr) {
     	}
     if (hwSPI){
         digitalWrite(cs, HIGH);
-        SPI.setBitOrder(MSBFIRST);
-        SPI.setClockDivider(SPI_CLOCK_DIV8);	// 72MHz / 8 = 9Mhz
-        SPI.setDataMode(0);
-        SPI.begin();	
+        spiClass->setBitOrder(MSBFIRST);
+        spiClass->setClockDivider(SPI_CLOCK_DIV8);	// 72MHz / 8 = 9Mhz
+        spiClass->setDataMode(0);
+        spiClass->begin(cs); // Passing the chip-select here just sets the pin mode. 
+                             // The peripheral won't automatically assert/deassert the pin during operation.
     	}
     }
   else
@@ -450,7 +454,7 @@ void Adafruit_SSD1306::clearDisplay(void) {
 inline void Adafruit_SSD1306::fastSPIwrite(uint8_t d) {
   
   if(hwSPI) {
-    (void)SPI.transfer(d);
+    (void)spiClass->transfer(d);
   } else {
     shiftOut(sid, sclk, MSBFIRST, d);		// SSD1306 specs show MSB out first
   }
