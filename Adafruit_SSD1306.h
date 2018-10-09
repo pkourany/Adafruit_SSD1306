@@ -112,11 +112,6 @@ All text above, and the splash screen must be included in any redistribution
 class Adafruit_SSD1306 : public Adafruit_GFX {
  public:
 
-  enum SpiPeripheral {
-    PERIPH_SPI,
-    PERIPH_SPI1,
-  };
-
   Adafruit_SSD1306(int8_t SID, int8_t SCLK, int8_t DC, int8_t RST, int8_t CS);
   Adafruit_SSD1306(int8_t DC, int8_t RST, int8_t CS, bool USE_SPI1 = false);
   Adafruit_SSD1306(int8_t RST);
